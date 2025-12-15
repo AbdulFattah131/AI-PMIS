@@ -1,0 +1,83 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Icons\AppIcon.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Icons\**" />
+    <EmbeddedResource Remove="Icons\**" />
+    <None Remove="Icons\**" />
+    <Page Remove="Icons\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Images\Adele_-_21.png" />
+    <None Remove="Images\Beat_It.jpg" />
+    <None Remove="Images\Dark_Side_of_the_Moon.png" />
+    <None Remove="Images\Funk_Wav_Bounces_1.jpg" />
+    <None Remove="Images\Image-Alice_Deejay_Better_Off_Alone.jpg" />
+    <None Remove="Images\images.jpg" />
+    <None Remove="Images\ImagineCover.jpg" />
+    <None Remove="Images\Journey_-_Any_Way_You_Want_It_single_cover.jpg" />
+    <None Remove="Images\Led_Zeppelin_-_Led_Zeppelin_III.png" />
+    <None Remove="Images\Led_Zeppelin_-_Mothership.jpg" />
+    <None Remove="Images\Mark_Ronson_-_Uptown_Special_%28Official_Album_Cover%29.png" />
+    <None Remove="Images\Michael_Jackson_-_Thriller.png" />
+    <None Remove="Images\Rock_or_Bust.jpg" />
+    <None Remove="Images\SecondHelpingLynyrdSkynyrd.jpg" />
+    <None Remove="Images\Skynyrd-Sweet-Home-Alabama.jpg" />
+    <None Remove="Images\The_Kids_Are_Coming_by_Tones_and_I.png" />
+    <None Remove="Images\Who_Needs_Guitars_Anyway_album_cover_by_Alice_DeeJay.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\AppIcon.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MusicPlayer.Data\MusicPlayer.Data.csproj" />
+    <ProjectReference Include="..\MusicPlayer.Utility\MusicPlayer.Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Adele_-_21.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Dark_Side_of_the_Moon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Funk_Wav_Bounces_1.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Led_Zeppelin_-_Mothership.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Mark_Ronson_-_Uptown_Special_(Official_Album_Cover).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Michael_Jackson_-_Thriller.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Rock_or_Bust.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\The_Kids_Are_Coming_by_Tones_and_I.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\" />
+    <Folder Include="bin\Debug\net8.0-windows\Icons\" />
+  </ItemGroup>
+
+</Project>

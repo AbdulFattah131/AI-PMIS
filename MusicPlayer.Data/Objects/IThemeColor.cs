@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Media;
+
+namespace MusicPlayer.Data.Objects
+{
+    public interface IThemeColor : INotifyPropertyChanged
+    {
+        Brush Brush { get; set; }   
+    }
+}

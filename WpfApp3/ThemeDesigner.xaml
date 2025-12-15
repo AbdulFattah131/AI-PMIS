@@ -1,0 +1,255 @@
+﻿<Window x:Class="MusicPlayer.UIComponents.ThemeDesigner"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MusicPlayer.UIComponents"
+        mc:Ignorable="d" Loaded="Window_Loaded"
+        Title="ThemeDesigner" Height="850" Width="400">
+
+
+    <Grid Name="grdMain" Margin="8,8,0,0" Background="{Binding CurrentTheme.WindowAccent.Brush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <ComboBox Name="cbThemes" Grid.Column="0" Height="24" VerticalAlignment="Center" Margin="0, 4, 2, 4" Width="190" HorizontalAlignment="Left" ItemsSource="{Binding Path=LoadedThemes}" DisplayMemberPath="Name"/>
+            <!-- Theme Switch -->
+            <ToggleButton x:Name="tbSwitchTheme" Margin="0, 0, 0, 0" Visibility="Visible" Grid.Column="1" Click="SwitchButton_Click" Width="35" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Transparent" BorderBrush="Transparent">
+                <ToggleButton.Template>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border x:Name="TemplateRoot"
+                 CornerRadius="5"
+                 Background="{TemplateBinding Background}"
+                 BorderBrush="{TemplateBinding BorderBrush}"
+                 BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <Border x:Name="Track"
+                         CornerRadius="9"
+                         Background="LightGray"
+                         Margin="1" />
+                                <Border x:Name="Thumb"
+                         CornerRadius="7"
+                         Background="White"
+                         Width="15" Height="15"
+                         HorizontalAlignment="Left"
+                         Margin="2" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Track" Property="Background" Value="#a688e7"/>
+                                <Setter TargetName="Thumb" Property="HorizontalAlignment" Value="Right"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="TemplateRoot" Property="BorderBrush" Value="DarkGray" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="TemplateRoot" Property="Opacity" Value="0.5" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </ToggleButton.Template>
+            </ToggleButton>
+            <Button Name="btnLoad" Content="Load" Click="btnLoad_Click" Height="24" Width="80" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0" Grid.Column="2"></Button>
+        </Grid>
+        <ScrollViewer Name="svFields" VerticalAlignment="Top" Grid.Row="1">
+            <Grid Name="grdFields">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Theme Name" VerticalAlignment="Center" Grid.Row="0"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="0">
+                    <TextBox Name="itbName" Text="{Binding Path=CustomTheme.Name, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" MaxLength="30" BorderThickness="2" Width="128" Margin="8,4,4,4"/>
+                </StackPanel>
+
+                <TextBlock Text="Window Text" VerticalAlignment="Center" Grid.Row="1"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="1">
+                    <TextBox Name="itbWindowTextForegroundHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.WindowTextForeground.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Center Text (Titles)" VerticalAlignment="Center" Grid.Row="2"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="2">
+                    <TextBox Name="itbWindowHeadingForegroundHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.WindowHeadingForeground.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Icons for the Toggle Buttons" VerticalAlignment="Center" Grid.Row="3"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="3">
+                    <TextBox Name="itbWindowPrimaryAnchorHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.WindowPrimaryAnchor.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Search Box" VerticalAlignment="Center" Grid.Row="4"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="4">
+                    <TextBox Name="itbSearchBoxBackgroundHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.SearchBoxBackground.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Sliders" VerticalAlignment="Center" Grid.Row="5"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="5">
+                    <TextBox Name="itbWindowPrimarySliderHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.WindowPrimarySlider.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="New Playlist Button" VerticalAlignment="Center" Grid.Row="6"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="6">
+                    <TextBox Name="itbWindowPrimaryHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.WindowPrimary.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Title Bar Text" VerticalAlignment="Center" Grid.Row="7"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="7">
+                    <TextBox Name="itbWindowTitleForegroundHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.WindowTitleForeground.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Window Background" VerticalAlignment="Center" Grid.Row="8"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="8">
+                    <TextBox Name="itbWindowContentBackgroundHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.WindowContentBackground.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Playback Controls" VerticalAlignment="Center" Grid.Row="9"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="9">
+                    <TextBox Name="itbComplementGrayHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.ComplementGray.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Artist Names" VerticalAlignment="Center" Grid.Row="10"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="10">
+                    <TextBox Name="itbCurrentSongArtistForegroundHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.CurrentSongArtistForeground.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Window Panels" VerticalAlignment="Center" Grid.Row="11"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="11">
+                    <TextBox Name="itbPlayerControlBackgroundHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.PlayerControlBackground.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Title Bar Background" VerticalAlignment="Center" Grid.Row="12"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="12">
+                    <TextBox Name="itbTitleBarBackgroundHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.TitleBarBackground.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="List Box on Hover" VerticalAlignment="Center" Grid.Row="13"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="13">
+                    <TextBox Name="itbListBoxHoverHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.ListBoxHover.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="List Box when Selected" VerticalAlignment="Center" Grid.Row="14"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="14">
+                    <TextBox Name="itbListBoxSelectedHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.ListBoxSelected.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Toggle Buttons on Hover" VerticalAlignment="Center" Grid.Row="15"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="15">
+                    <TextBox Name="itbLeftToggleHoverHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.LeftToggleHover.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Toggle Buttons when Selected" VerticalAlignment="Center" Grid.Row="16"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="16">
+                    <TextBox Name="itbLeftToggleSelectedHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.LeftToggleSelected.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Play, Pause Button" VerticalAlignment="Center" Grid.Row="17"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="17">
+                    <TextBox Name="itbPlayPauseBackgroundHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.PlayPauseBackground.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Genres Text" VerticalAlignment="Center" Grid.Row="18"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="18">
+                    <TextBox Name="itbGenresTextForegroundHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.GenresTextForeground.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Now Playing Icon" VerticalAlignment="Center" Grid.Row="19"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="19">
+                    <TextBox Name="itbNowPlayingForegroundHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.NowPlayingForeground.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="New Playlist Button on Hover" VerticalAlignment="Center" Grid.Row="20"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="20">
+                    <TextBox Name="itbNewPlaylistHoverHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.NewPlaylistHover.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+                <TextBlock Text="Playlists Toggle when Selected" VerticalAlignment="Center" Grid.Row="21"/>
+                <StackPanel Orientation="Horizontal" Height="32" Grid.Column="1" Grid.Row="21">
+                    <TextBox Name="itbPlaylistsToggleSelectedHex" TextChanged="TextBox_TextChanged" VerticalContentAlignment="Center" BorderThickness="2" MaxLength="9" Width="128" Margin="8,4,4,4"/>
+                    <Rectangle Fill="{Binding Path=CustomTheme.PlaylistsToggleSelected.Brush, UpdateSourceTrigger=PropertyChanged}" Width="24" Height="24" Margin="4" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1"/>
+                </StackPanel>
+
+            </Grid>
+        </ScrollViewer>
+        
+        <!-- Buttons -->
+        <StackPanel Margin="0, 0, 15, 0" Grid.Row="3"
+        Orientation="Horizontal"
+        HorizontalAlignment="Right"
+    >
+            <Button Name="btnSave"
+        Content="Save"
+        Width="100" Height="32"
+        Background="#DBD9EA"
+        Foreground="Black"
+        BorderThickness="0"
+        Click="btnSave_Click"
+       />
+            <Button Name="btnApply"
+        Content="Apply"
+        Width="100" Height="32"
+        Background="#393b40"
+        Foreground="White"
+        BorderThickness="0"
+        Click="btnApply_Click"
+        />
+        </StackPanel>
+
+    </Grid>
+</Window>
