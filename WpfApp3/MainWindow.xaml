@@ -1518,7 +1518,6 @@ left panel
 right panel
 api-->
             <UserControl x:Name="ucTasksView" Grid.Column="1">
-                
             <!-- Tasks View -->
 
                 <Border x:Name="bdCenterPanel2" CornerRadius="13" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="10, 10, 10, 15">
@@ -1855,10 +1854,11 @@ api-->
                 </UserControl.Style>
             </UserControl>
 
-            <UserControl x:Name="ucNotesView" Grid.Column="1">
+            <UserControl x:Name="ucFinanceView" Grid.Column="1">
+                
                 <!-- Songs View -->
 
-                <Border x:Name="bdNotes" CornerRadius="13" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="10, 10, 10, 15">
+                <Border x:Name="bdFinance" CornerRadius="13" Background="{Binding CurrentTheme.PlayerControlBackground.Brush}" Margin="10, 10, 10, 15">
                     <Border.Effect>
                         <DropShadowEffect Color="{Binding CurrentTheme.ComplementGray.Brush}"
                                           Direction="270"
@@ -1866,13 +1866,13 @@ api-->
                                           Opacity="0.18"
                                           BlurRadius="8"/>
                     </Border.Effect>
-                    <Grid x:Name="grdNotesViewMain">
+                    <Grid x:Name="grdFinanceViewMain">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="60"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
@@ -1880,7 +1880,7 @@ api-->
 
                         <!-- Grid Songs View -->
 
-                        <Grid x:Name="grdNotesView" Grid.Row="1" Grid.ColumnSpan="2" Margin="40, 5, 40, 0">
+                        <Grid x:Name="grdFinanceView" Grid.Row="1" Grid.ColumnSpan="2" Margin="40, 5, 40, 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
@@ -1892,7 +1892,7 @@ api-->
 
                             <!-- Heading -->
 
-                            <TextBlock x:Name="tbNotesViewHeading" Grid.Row="0" Text="Notes" FontSize="18" FontWeight="Black" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
+                            <TextBlock x:Name="tbFinanceViewHeading" Grid.Row="0" Text="Finance Tracker" FontSize="18" FontWeight="Black" Foreground="{Binding CurrentTheme.WindowHeadingForeground.Brush}" HorizontalAlignment="Left"/>
 
                             <!-- SongsListBox1 -->
 
