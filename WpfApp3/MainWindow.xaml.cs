@@ -37,8 +37,8 @@ namespace MusicPlayer.UIComponents
             ApplyRestoreWindow();
 
             _player = new AudioPlayer();
+            m_vm.MusicPlayerCache.StartClock();
         }
-
         private void LoadPersistence()
         {
         // last volume level
@@ -73,7 +73,6 @@ namespace MusicPlayer.UIComponents
         { 
             //Initialize UI State
             btnToggleAlbums.IsChecked = true;
-
         }
 
         // Title Bar
@@ -258,21 +257,7 @@ namespace MusicPlayer.UIComponents
         {
             m_vm.MusicPlayerCache.PlayPause();
         }
-        private void tbRepeat_Click(object sender, RoutedEventArgs e)
-        {
-            if (tbRepeat.IsChecked == true)
-            {
-                m_vm.MusicPlayerCache.RepeatMode = ENMusicPlayerRepeatMode.RepeatList;
-            }
-            else if (tbRepeat.IsChecked == null)
-            {
-                m_vm.MusicPlayerCache.RepeatMode = ENMusicPlayerRepeatMode.RepeatSong;
-            }
-            else if (tbRepeat.IsChecked == false)
-            {
-                m_vm.MusicPlayerCache.RepeatMode = ENMusicPlayerRepeatMode.None;
-            }
-        }
+     
 
         private void tbPrevious_Click(object sender, RoutedEventArgs e)
         {
@@ -359,24 +344,24 @@ namespace MusicPlayer.UIComponents
                         {
                             if (toggle.Name == "btnToggleAlbums")
                             {
-                                lbAllSongsList.SelectionChanged -= AllSongsListBox_SelectionChanged;
+                                //lbAllSongsList.SelectionChanged -= AllSongsListBox_SelectionChanged;
 
-                                lbAlbumContents.SelectionChanged -= AlbumContentsListBox_SelectionChanged;
-                                lbAlbumContents.SelectionChanged += AlbumContentsListBox_SelectionChanged;
+                                //lbAlbumContents.SelectionChanged -= AlbumContentsListBox_SelectionChanged;
+                                //lbAlbumContents.SelectionChanged += AlbumContentsListBox_SelectionChanged;
                             }
 
                             if (toggle.Name == "btnToggleSongs")
                             {
-                                lbAlbumContents.SelectionChanged -= AlbumContentsListBox_SelectionChanged;
+                                //lbAlbumContents.SelectionChanged -= AlbumContentsListBox_SelectionChanged;
 
-                                lbAllSongsList.SelectionChanged -= AllSongsListBox_SelectionChanged;
-                                lbAllSongsList.SelectionChanged += AllSongsListBox_SelectionChanged;
+                                //lbAllSongsList.SelectionChanged -= AllSongsListBox_SelectionChanged;
+                                //lbAllSongsList.SelectionChanged += AllSongsListBox_SelectionChanged;
                             }
 
                             if (toggle.Name == "btnPlaylistSongs")
                             {
-                                lbAlbumContents.SelectionChanged -= AlbumContentsListBox_SelectionChanged;
-                                lbAllSongsList.SelectionChanged -= AllSongsListBox_SelectionChanged;
+                                //lbAlbumContents.SelectionChanged -= AlbumContentsListBox_SelectionChanged;
+                                //lbAllSongsList.SelectionChanged -= AllSongsListBox_SelectionChanged;
 
                                 //lbPlaylistList.SelectionChanged -= lbPlaylistList_SelectionChanaged;
                                 //lbPlaylistList.SelectionChanged += lbPlaylistList_SelectionChanaged;

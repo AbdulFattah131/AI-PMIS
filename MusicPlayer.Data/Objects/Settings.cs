@@ -9,13 +9,7 @@ namespace MusicPlayer.Data.Objects
         {
             get;
             set;
-        } = "Lavender";
-
-        public string MusicLibraryPath
-        {
-            get;
-            set;
-        }
+        } 
 
         public Point LastWindowCoordinates
         {
@@ -29,10 +23,6 @@ namespace MusicPlayer.Data.Objects
             set;
         } = new Point(1280, 720);
 
-        public float? LastKnownVolume
-        {
-            get;
-            set;
-        } = 0.5f;
+
     }
 }

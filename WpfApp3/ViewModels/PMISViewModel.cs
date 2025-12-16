@@ -11,7 +11,21 @@ namespace MusicPlayer.UIComponents.ViewModels
     public class MusicPlayerCache : INotifyPropertyChanged
     {
         #region Music Player Collections
+        internal void Clear()
+        {
+            Player.Stop();
+            IsPlaying = false;
 
+            CurrentSong = null;
+            SelectedAlbum = null;
+
+            PlaybackQueue.Clear();
+
+            Songs?.Clear();
+            AllSongs.Clear();
+            Albums.Clear();
+            OnPropertyChanged("");
+        }
         private ObservableCollection<Song> _lstSongs; // collection of all songs
         public ObservableCollection<Song> Songs
         {
@@ -357,39 +371,67 @@ namespace MusicPlayer.UIComponents.ViewModels
             // timer
             _timer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromMilliseconds(1000)
+                Interval = TimeSpan.FromSeconds(1)
             };
             _timer.Tick += Timer_Tick;
             _timer.Start();
+
+            StartClock(); // Initial update
 
             Player.SongEnded += OnSongEnded;
             OnPropertyChanged("");
         }
 
-        // Timer Tick
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (!IsPlaying)
-                return;
-
-            CurrentPosition = CurrentPosition + 1;
+            StartClock();
         }
-        internal void Clear()
+        private DispatcherTimer _clockTimer;
+        public void StartClock()
         {
-            Player.Stop();
-            IsPlaying = false;
-
-            CurrentSong = null;
-            SelectedAlbum = null;
-
-            PlaybackQueue.Clear();
-
-            Songs?.Clear();
-            AllSongs.Clear();
-            Albums.Clear();
-            OnPropertyChanged("");
+            _clockTimer = new DispatcherTimer();
+            _clockTimer.Interval = TimeSpan.FromSeconds(1);
+            _clockTimer.Tick += (s, e) =>
+            {
+                DateTime now = DateTime.Now;
+                CurrentTime = now.ToString("hh:mm tt");       // 12-hour format
+                CurrentDate = now.ToString("dddd, dd MMM yyyy");
+                DayNightIcon = now.Hour >= 6 && now.Hour < 18 ? "☀️" : "🌙";
+            };
+            _clockTimer.Start();
         }
 
+      
+        private string _currentTime;
+        public string CurrentTime
+        {
+            get => _currentTime;
+            set
+            {
+                _currentTime = value;
+                OnPropertyChanged(nameof(CurrentTime));
+            }
+        }
+        private string _dayNightIcon;
+        public string DayNightIcon
+        {
+            get => _dayNightIcon;
+            private set
+            {
+                _dayNightIcon = value;
+                OnPropertyChanged(nameof(DayNightIcon));
+            }
+        }
+        private string _currentDate;
+        public string CurrentDate
+        {
+            get => _currentDate;
+            set
+            {
+                _currentDate = value;
+                OnPropertyChanged(nameof(CurrentDate));
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName) =>

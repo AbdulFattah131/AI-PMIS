@@ -80,4 +80,8 @@
     <Folder Include="bin\Debug\net8.0-windows\Icons\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Forge.OpenAI" Version="1.6.2" />
+  </ItemGroup>
+
 </Project>

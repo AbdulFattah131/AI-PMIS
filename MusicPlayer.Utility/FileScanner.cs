@@ -1,60 +1,78 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 
 namespace MusicPlayer.Utility
 {
-    //Singleton 
+    /// <summary>
+    /// Singleton class for scanning and loading PMIS Bot audio files.
+    /// Designed for PMIS Bot Music Player to dynamically retrieve task or notification sounds.
+    /// </summary>
     public class FileScanner
     {
-        // Scan and load all song File Paths into our project.
-
+        // Singleton instance
         private static FileScanner _instance;
 
         public static FileScanner Instance
         {
             get
             {
-               if(_instance == null)
+                if (_instance == null)
                     _instance = new FileScanner();
-
-               return _instance;
+                return _instance;
             }
         }
 
-        public string FilePath
-        {
-            get; private set;
-        } = @"./Songs";
+        /// <summary>
+        /// Base folder where PMIS bot audio files are stored
+        /// </summary>
+        public string FilePath { get; private set; } = @"./PMISBotAudio";
 
-        FileScanner()
+        /// <summary>
+        /// Private constructor for singleton
+        /// </summary>
+        private FileScanner()
         {
-           
+            // Could initialize default folders or logging here
         }
 
-        public void UpdateFilePath(string stFilePath)
+        /// <summary>
+        /// Updates the audio files folder for the PMIS bot
+        /// </summary>
+        public void UpdateFilePath(string newFilePath)
         {
-            FilePath = stFilePath;
+            if (!string.IsNullOrEmpty(newFilePath))
+                FilePath = newFilePath;
         }
 
-        public ObservableCollection<string> ScanSongs()
+        /// <summary>
+        /// Scans the folder and returns all supported PMIS bot audio files
+        /// </summary>
+        public ObservableCollection<string> ScanBotAudioFiles()
         {
-            ObservableCollection<string> lstSongFilePaths = new ObservableCollection<string>();
+            var audioFiles = new ObservableCollection<string>();
 
             try
             {
-                string filePath = FilePath;
-                var allowedExtensions = new[] { ".mp3", ".m4a" };
-                List<string> files = Directory.GetFiles(filePath)
-                                     .Where(file => allowedExtensions.Any(ext => file.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
-                                     .ToList();
-                 
-                lstSongFilePaths = new ObservableCollection<string>(files);
+                string folder = FilePath;
+
+                // PMIS bot supports mp3 and wav files
+                var allowedExtensions = new[] { ".mp3", ".wav" };
+
+                List<string> files = Directory.GetFiles(folder)
+                    .Where(f => allowedExtensions.Any(ext => f.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
+                    .ToList();
+
+                audioFiles = new ObservableCollection<string>(files);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error reading files: {ex.Message}");
+                Console.WriteLine($"[PMISBot FileScanner] Error reading files: {ex.Message}");
             }
 
-            return lstSongFilePaths;
+            return audioFiles;
         }
     }
 }
