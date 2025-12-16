@@ -360,14 +360,6 @@ namespace MusicPlayer.UIComponents.ViewModels
         {
             TagReader.Instance.Reset();
 
-            var songFilePaths = FileScanner.Instance.ScanSongs();              // song file paths
-
-            AllSongs = TagReader.Instance.ReadSongsFromFilePaths(songFilePaths);  // song objects
-
-            Albums = new ObservableCollection<Album>(TagReader.Instance.GetAlbums());   // albums
-
-            PlaybackQueue = new ObservableCollection<Song>();                   // playback queue
-
             // timer
             _timer = new DispatcherTimer
             {

@@ -129,7 +129,7 @@ namespace MusicPlayer.UIComponents.ViewModels
             CurrentTheme = defaultTheme;
             Settings = new Settings();
             Settings = SettingsReader.Instance.ReadFromFile("./Settings.xml");
-            FileScanner.Instance.UpdateFilePath(Settings.MusicLibraryPath);
+
             Init();
         }
 

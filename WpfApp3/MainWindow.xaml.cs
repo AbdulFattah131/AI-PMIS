@@ -28,8 +28,6 @@ namespace MusicPlayer.UIComponents
 
             InitializeViewModel();
 
-            LoadPersistence();
-
             LoadThemes();
 
             InitializeUIState();
@@ -39,16 +37,7 @@ namespace MusicPlayer.UIComponents
             _player = new AudioPlayer();
             m_vm.MusicPlayerCache.StartClock();
         }
-        private void LoadPersistence()
-        {
-        // last volume level
-        float? fLastKnownVolume = m_vm.Settings.LastKnownVolume;
-
-            if (fLastKnownVolume == null)
-                m_vm.MusicPlayerCache.Player.InitializeVolume();
-            else
-                m_vm.MusicPlayerCache.Player.SystemVolume = (float)m_vm.Settings.LastKnownVolume;
-        }
+       
         
         private void InitializeViewModel()
         {             
@@ -233,8 +222,7 @@ namespace MusicPlayer.UIComponents
             m_vm.Settings.CurrentThemeName = m_vm.CurrentTheme.Name;
             m_vm.Settings.LastWindowCoordinates = new Point(this.Left, this.Top);
             m_vm.Settings.LastWindowDimensions = new Point(this.Width, this.Height);
-            m_vm.Settings.LastKnownVolume = m_vm.MusicPlayerCache.Player.SystemVolume;
-            m_vm.Settings.MusicLibraryPath = FileScanner.Instance.FilePath;
+       
 
             SettingsWriter.Instance.WriteToFile(m_vm.Settings);
         }
